@@ -26,9 +26,18 @@ public class SortingEntry {
 
         // Your Implement Here
         switch (command) {
-            // case "title" -> System.out.println("QuickSort: Sort by title.");
+            // ase "title" -> System.out.println("QuickSort: Sort by title.");
+            case "title" ->
+                Comparator<FilmRecord> myComparator = Comparator.comparing(FilmRecord::get_title);
+                new QuickSort(records, myComparator);
             // case "year" -> System.out.println("MergeSort: Sort by year.");
+            case "year" ->
+                Comparator<FilmRecord> myComparator = Comparator.comparing(FilmRecord::get_year);
+                new MergeSort<>(records, myComparator);
             // case "rating" -> System.out.println("HeapSort: Sort by rating.");
+            case "rating" ->
+                Comparator<FilmRecord> myComparator = Comparator.comparing(FilmRecord::get_rating);
+                new HeapSort<>(records, myComparator);
             // case "year-title" -> System.out.println("QuickSort: Sort by year first, then by title.");
             // case "year-rating" -> System.out.println("MergeSort: Sort by year first, then by rating.");
             // case "rating-title" -> System.out.println("HeapSort: Sort by rating first, then by title.");
