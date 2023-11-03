@@ -4,7 +4,7 @@ public class MergeSort<K extends Comparable<? super K>, E>{
 
 public void mergesort(Comparable [] A, Comparable temp [], int left, int right){
 
-    private Comparator<MergeSort> myComparator = (a, b) -> {
+    public Comparator<MergeSort> myComparator = (a, b) -> {
     if (a == null && b == null) {
         return 0; // Both are null, consider them equal.
     } else if (a == null) {
@@ -24,7 +24,7 @@ public void mergesort(Comparable [] A, Comparable temp [], int left, int right){
         else innsort(A, left, mid, myComparator);
         if(right-mid) > THRESHOLD) mergesort(A, temp, mid+1, right);
         else innsort(A, left, mid+1, myComparator);
-            //merge sort operation. copy 2 halves to temp
+        //merge sort operation. copy 2 halves to temp
         for(i = left; i<= mid; i++){
             temp[i] = A[i];
         }
@@ -39,9 +39,10 @@ public void mergesort(Comparable [] A, Comparable temp [], int left, int right){
                 A[k] = temp[j--];
             }
         }
-    public void innsort(A, left, right, myComparator) {
+    public void innsort( A, left, right, myComparator) {
         // Your insertion sort implementation with a comparator.
     }
-}
+
     private int compareTo(MergeSort b) {
+    }
     }

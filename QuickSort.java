@@ -1,3 +1,4 @@
+import java.util.Comparator;
 public class QuickSort<K extends Comparable<? super K>, E>{
 void quicksort(Comparable [] A, int i, int j){
     int pivotindex = findpivot(A, i, j);
