@@ -1,8 +1,10 @@
 import java.util.Comparator;
 
 public class MergeSort<K extends Comparable<? super K>, E>{
+    private static final int THRESHOLD = 10;
 
 public void mergesort(Comparable [] A, Comparable temp [], int left, int right){
+
 
     public Comparator<MergeSort> myComparator = (a, b) -> {
     if (a == null && b == null) {

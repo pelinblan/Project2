@@ -4,11 +4,13 @@ public class MaxHeap<K extends Comparable<? super K>, E> {
     private int size; // Maximum size of heap
     private int n; // # of things in heap
 
+    private Comparator<E> myComparator;
+
     public MaxHeap(E[] h, int num, int max) {
         Heap = h;
         n = num;
         size = max;
-        buildheap();
+        buildheap(myComparator);
     }
 
     public int heapsize() {
@@ -25,18 +27,18 @@ public class MaxHeap<K extends Comparable<? super K>, E> {
     public E removemax() {
         assert n > 0 : "Removing from empty heap";
         swap(Heap, 0, --n);
-        if (n != 0) siftdown(0);
+        if (n != 0) siftdown(0, myComparator);
         return Heap[n];
     }
 
-    private void siftdown(int pos) {
+    private void siftdown(int pos, Comparator<E> myComparator) {
         assert (pos >= 0) && (pos < n) :
                 "Illegal heap position";
         while (!isLeaf(pos)) {
             int j = leftchild(pos);
-            if (j < (n - 1) && myComparator.compare(Heap[j], Heap[j + 1]) < 0)
+            if (j < (n - 1) && compareTo(Heap[j], Heap[j + 1], myComparator) < 1)
                 j++; // index of child w/ greater value
-            if (myComparator.compare(Heap[pos], Heap[j]) >= 0)
+            if (compareTo(Heap[pos], Heap[j], myComparator) >= 0)
                 return;
             swap(Heap, pos, j);
             pos = j; // Move down
