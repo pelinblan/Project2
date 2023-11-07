@@ -15,7 +15,7 @@ public void mergesort(Comparable [] A, Comparable temp [], int left, int right) 
         else{
             innsort(A, left, mid, myComparator);
         }
-        if(right - mid) >= THRESHOLD){
+        if((right-mid) >= THRESHOLD){
         mergesort(A, temp, mid+1, right);
         }
         else{
@@ -31,19 +31,21 @@ public void mergesort(Comparable [] A, Comparable temp [], int left, int right) 
         }
         //merge sublists back to the array
         for (i = left, j = right, k = left; k <= right; k++) {
-            if (myComparator.compare((K) temp[i], (K) temp[j]) <= 0) {
+            if (myComparator.compare((E)temp[i], (E)temp[j]) <= 0) {
                 A[k] = temp[i++];
             } else {
                 A[k] = temp[j--];
             }
         }
-    public void innsort(Comparable [] A, left, right, myComparator) {
-        // Your insertion sort implementation with a comparator
-        for (i = left + 1; i <= right; i++) {
-            Comparable<K> current = A[i];
-            j = i;
+}
 
-            while (j > left && myComparator.compare(current, A[j - 1]) < 0) {
+    public void innsort(Comparable [] A, int left, int right, Comparator<E> myComparator) {
+        // Your insertion sort implementation with a comparator
+        for (int i = left + 1; i <= right; i++) {
+            Comparable<E> current = A[i];
+            int j = i;
+
+            while (j > left && myComparator.compare((E)current, (E)A[j - 1]) < 0) {
                 A[j] = A[j - 1];
                 j--;
             }
@@ -52,7 +54,6 @@ public void mergesort(Comparable [] A, Comparable temp [], int left, int right) 
         }
     }
 
+}
 
-}
-}
 
