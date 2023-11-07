@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Comparator;
 public class HeapSort<K extends Comparable<? super K>, E> {
     private E[] Heap; // Pointer to heap array
@@ -6,11 +7,13 @@ public class HeapSort<K extends Comparable<? super K>, E> {
 
     private Comparator<E> myComparator;
 
-    public HeapSort(E[] h, int num, int max) {
-        Heap = h;
-        n = num;
-        size = max;
+    public HeapSort(ArrayList<E> records, Comparator<E> myComparator) {
+        this.myComparator = myComparator;
+        n = records.size();
+        size = n;
+        Heap = (E[]) records.toArray(new FilmRecord[n]);
         buildheap(myComparator);
+
     }
     public int heapsize() {
         return n;
@@ -27,18 +30,18 @@ public class HeapSort<K extends Comparable<? super K>, E> {
     public E removemax() {
         assert n > 0 : "Removing from empty heap";
         swap(Heap, 0, --n);
-        if (n != 0) siftdown(0, myComparator);
+        if (n != 0) shiftdown(0, myComparator);
         return Heap[n];
     }
 
-    private void siftdown(int pos, Comparator<E> myComparator) {
+    private void shiftdown(int pos, Comparator<E> myComparator) {
         assert (pos >= 0) && (pos < n) :
                 "Illegal heap position";
         while (!isLeaf(pos)) {
             int j = leftchild(pos);
-            if (j < (n - 1) && compareTo(Heap[j], Heap[j + 1], myComparator) < 1)
+            if ((j < (n - 1) && myComparator.compare(Heap[j], Heap[j + 1]) < 0))
                 j++; // index of child w/ greater value
-            if (compareTo(Heap[pos], Heap[j], myComparator) >= 0)
+            if (myComparator.compare(Heap[pos], Heap[j]) >= 0)
                 return;
             swap(Heap, pos, j);
             pos = j; // Move down
@@ -47,12 +50,8 @@ public class HeapSort<K extends Comparable<? super K>, E> {
 
     private void buildheap(Comparator<E> myComparator) {
         for (int i = (n / 2) - 1; i >= 0; i--) {
-            siftdown(i, myComparator);
+            shiftdown(i, myComparator);
         }
-    }
-
-    public int compareTo(E A, E B, Comparator<E> myComparator) {
-        return myComparator.compare(A, B);
     }
     private void swap(E[] arr, int i, int j) {
         E temp = arr[i];
@@ -60,10 +59,11 @@ public class HeapSort<K extends Comparable<? super K>, E> {
         arr[j] = temp;
     }
 
-    static void heapSort(Comparable[] A) {
-        HeapSort H = new HeapSort(A, A.length, A.length);
-        for (int i = 0; i < A.length; i++) {
+     void heapSort(Comparable[] A, Comparator<E> myComparator) {
+        HeapSort H = new HeapSort(A, myComparator);
+        for (int i = A.length - 1; i >= 0; i--) {
             H.removemax();
         }
+
     }
 }

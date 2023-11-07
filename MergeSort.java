@@ -1,9 +1,18 @@
+import java.util.ArrayList;
 import java.util.Comparator;
 
 public class MergeSort<K extends Comparable<? super K>, E>{
     private static final int THRESHOLD = 10;
     private Comparator<E> myComparator;
-public void mergesort(Comparable [] A, Comparable temp [], int left, int right) {
+
+    public MergeSort(ArrayList<E> records, Comparator<E> myComparator) {
+        this.myComparator = myComparator;
+        Comparable[] array = records.toArray(new Comparable[0]);
+        Comparable[] temp = new Comparable[array.length];
+        mergesort(array, temp, 0, array.length - 1);
+        }
+
+    public void mergesort(Comparable [] A, Comparable temp [], int left, int right) {
     int i, j, k, mid;
         mid = (left+right)/2; //select the midpoint
 

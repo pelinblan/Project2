@@ -50,14 +50,17 @@ public class SortingEntry {
             case "year-rating" -> {
                 Comparator<FilmRecord> myComparator = Comparator.comparing(FilmRecord::get_releseYear).thenComparing(FilmRecord::get_rating);
                 new MergeSort(records, myComparator);
-                // case "rating-title" -> System.out.println("HeapSort: Sort by rating first, then by title.");
-                case "rating-title" -> {
-                    Comparator<FilmRecord> myComparator = Comparator.comparing(FilmRecord::get_rating).thenComparing(FilmRecord::get_title);
-                    new QuickSort(records, myComparator);
-                }
             }
-
+                // case "rating-title" -> System.out.println("HeapSort: Sort by rating first, then by title.");
+            case "rating-title" -> {
+                Comparator<FilmRecord> myComparator = Comparator.comparing(FilmRecord::get_rating).thenComparing(FilmRecord::get_title);
+                new QuickSort(records, myComparator);
+            }
         }
+
+    }
+}
+
 
 
 

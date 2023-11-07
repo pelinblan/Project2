@@ -1,7 +1,15 @@
+import java.util.ArrayList;
 import java.util.Comparator;
 public class QuickSort<K extends Comparable<? super K>, E>{
     private Comparator<E> myComparator;
-void quicksort(Comparable [] A, int i, int j){
+
+    public QuickSort(ArrayList<E> records, Comparator<E> myComparator) {
+        this.myComparator = myComparator;
+        Comparable [] array = records.toArray(new Comparable[0]);
+        quicksort(array, 0, array.length - 1);
+    }
+
+    void quicksort(Comparable [] A, int i, int j){
     int pivotindex = findpivot(A, i, j);
     swap(A, pivotindex, j);
     int k = partition(A, i, j, A[pivotindex], myComparator);
