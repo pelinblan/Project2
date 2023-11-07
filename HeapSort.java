@@ -1,12 +1,12 @@
 import java.util.Comparator;
-public class MaxHeap<K extends Comparable<? super K>, E> {
+public class HeapSort<K extends Comparable<? super K>, E> {
     private E[] Heap; // Pointer to heap array
     private int size; // Maximum size of heap
     private int n; // # of things in heap
 
     private Comparator<E> myComparator;
 
-    public MaxHeap(E[] h, int num, int max) {
+    public HeapSort(E[] h, int num, int max) {
         Heap = h;
         n = num;
         size = max;
@@ -61,7 +61,7 @@ public class MaxHeap<K extends Comparable<? super K>, E> {
     }
 
     static void heapSort(Comparable[] A) {
-        MaxHeap H = new MaxHeap(A, A.length, A.length);
+        HeapSort H = new HeapSort(A, A.length, A.length);
         for (int i = 0; i < A.length; i++) {
             H.removemax();
         }
