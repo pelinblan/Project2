@@ -26,24 +26,38 @@ public class SortingEntry {
 
         // Your Implement Here
         switch (command) {
-            // ase "title" -> System.out.println("QuickSort: Sort by title.");
-            case "title" ->
+            // case "title" -> System.out.println("QuickSort: Sort by title.");
+            case "title" -> {
                 Comparator<FilmRecord> myComparator = Comparator.comparing(FilmRecord::get_title);
                 new QuickSort(records, myComparator);
+            }
             // case "year" -> System.out.println("MergeSort: Sort by year.");
-            case "year" ->
-                Comparator<FilmRecord> myComparator = Comparator.comparing(FilmRecord::get_year);
-                new MergeSort<>(records, myComparator);
+            case "year" -> {
+                Comparator<FilmRecord> myComparator = Comparator.comparing(FilmRecord::get_releseYear);
+                new MergeSort(records, myComparator);
+            }
             // case "rating" -> System.out.println("HeapSort: Sort by rating.");
-            case "rating" ->
+            case "rating" -> {
                 Comparator<FilmRecord> myComparator = Comparator.comparing(FilmRecord::get_rating);
-                new HeapSort<>(records, myComparator);
+                new HeapSort(records, myComparator);
+            }
             // case "year-title" -> System.out.println("QuickSort: Sort by year first, then by title.");
+            case "year-title" -> {
+                Comparator<FilmRecord> myComparator = Comparator.comparing(FilmRecord::get_releseYear).thenComparing(FilmRecord::get_title);
+                new QuickSort(records, myComparator);
+            }
             // case "year-rating" -> System.out.println("MergeSort: Sort by year first, then by rating.");
-            // case "rating-title" -> System.out.println("HeapSort: Sort by rating first, then by title.");
+            case "year-rating" -> {
+                Comparator<FilmRecord> myComparator = Comparator.comparing(FilmRecord::get_releseYear).thenComparing(FilmRecord::get_rating);
+                new MergeSort(records, myComparator);
+                // case "rating-title" -> System.out.println("HeapSort: Sort by rating first, then by title.");
+                case "rating-title" -> {
+                    Comparator<FilmRecord> myComparator = Comparator.comparing(FilmRecord::get_rating).thenComparing(FilmRecord::get_title);
+                    new QuickSort(records, myComparator);
+                }
+            }
+
         }
-    }
-}
 
 
 

@@ -12,7 +12,6 @@ public class MaxHeap<K extends Comparable<? super K>, E> {
         size = max;
         buildheap(myComparator);
     }
-
     public int heapsize() {
         return n;
     }
@@ -22,6 +21,7 @@ public class MaxHeap<K extends Comparable<? super K>, E> {
     }
 
     public int leftchild(int pos) { // Leftchild position
+        return 2 * pos + 1;
     }
 
     public E removemax() {
@@ -61,7 +61,7 @@ public class MaxHeap<K extends Comparable<? super K>, E> {
     }
 
     static void heapSort(Comparable[] A) {
-        MaxHeap H = new MaxHeap(A, A.length, A.length)
+        MaxHeap H = new MaxHeap(A, A.length, A.length);
         for (int i = 0; i < A.length; i++) {
             H.removemax();
         }
