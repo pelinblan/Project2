@@ -16,6 +16,8 @@ public class HeapSort<K extends Comparable<? super K>, E> {
         size = n;
         Heap = (E[]) records.toArray(new FilmRecord[n]);
         buildheap(myComparator);
+        heapSort(records, myComparator);
+        writeDataToFile(records);
 
     }
 
@@ -57,21 +59,29 @@ public class HeapSort<K extends Comparable<? super K>, E> {
             shiftdown(i, myComparator);
         }
     }
+
     private void swap(E[] arr, int i, int j) {
         E temp = arr[i];
         arr[i] = arr[j];
         arr[j] = temp;
     }
 
-    void heapSort(Comparable[] A, Comparator<E> myComparator) {
-         ArrayList<Comparable> B = new ArrayList<Comparable>();
-         for(int i = 0; i < A.length; i++){
-             B.add(A[i]);
-         }
+    E heapSort(ArrayList<E> A, Comparator<E> myComparator) {
+        HeapSort H = new HeapSort(A, myComparator);
+        E max = null;
+        for (int i = n - 1; i >= 0; i--) {
+            max = (E) H.removemax();
+            return max;
+        }
+        return max;
+    }
+
+
+    public void writeDataToFile(ArrayList<E> A) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("heapSort.txt"))) {
-            HeapSort H = new HeapSort(B, myComparator);
+            HeapSort H = new HeapSort(A, myComparator);
             for (int i = n - 1; i >= 0; i--) {
-                E max = (E) H.removemax();
+                E max = (E) heapSort(A, myComparator);
                 writer.write(max.toString()); // Assuming E has a meaningful toString method
                 writer.newLine();
             }
@@ -80,4 +90,5 @@ public class HeapSort<K extends Comparable<? super K>, E> {
         }
     }
 }
+
 
