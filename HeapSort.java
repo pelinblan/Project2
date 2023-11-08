@@ -1,3 +1,6 @@
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 public class HeapSort<K extends Comparable<? super K>, E> {
@@ -15,6 +18,7 @@ public class HeapSort<K extends Comparable<? super K>, E> {
         buildheap(myComparator);
 
     }
+
     public int heapsize() {
         return n;
     }
@@ -59,11 +63,21 @@ public class HeapSort<K extends Comparable<? super K>, E> {
         arr[j] = temp;
     }
 
-     void heapSort(Comparable[] A, Comparator<E> myComparator) {
-        HeapSort H = new HeapSort(A, myComparator);
-        for (int i = A.length - 1; i >= 0; i--) {
-            H.removemax();
+    void heapSort(Comparable[] A, Comparator<E> myComparator) {
+         ArrayList<Comparable> B = new ArrayList<Comparable>();
+         for(int i = 0; i < A.length; i++){
+             B.add(A[i]);
+         }
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("heapSort.txt"))) {
+            HeapSort H = new HeapSort(B, myComparator);
+            for (int i = n - 1; i >= 0; i--) {
+                E max = (E) H.removemax();
+                writer.write(max.toString()); // Assuming E has a meaningful toString method
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            System.err.println("Error writing to the file: " + e.getMessage());
         }
-
     }
 }
+

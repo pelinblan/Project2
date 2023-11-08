@@ -1,3 +1,6 @@
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 public class QuickSort<K extends Comparable<? super K>, E>{
@@ -10,6 +13,7 @@ public class QuickSort<K extends Comparable<? super K>, E>{
     }
 
     void quicksort(Comparable [] A, int i, int j){
+    writeSortedDataToFile(A);
     int pivotindex = findpivot(A, i, j);
     swap(A, pivotindex, j);
     int k = partition(A, i, j, A[pivotindex], myComparator);
@@ -41,5 +45,15 @@ public class QuickSort<K extends Comparable<? super K>, E>{
         Comparable temp = A[i];
         A[i] = A[j];
         A[j] = temp;
+    }
+    public void writeSortedDataToFile(Comparable[] array) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("quickSort.txt"))) {
+            for (Comparable item : array) {
+                writer.write(item.toString()); // Assuming E has a meaningful toString method
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            System.err.println("Error writing to the file: " + e.getMessage());
+        }
     }
 }

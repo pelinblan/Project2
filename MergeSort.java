@@ -1,3 +1,6 @@
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -45,6 +48,7 @@ public class MergeSort<K extends Comparable<? super K>, E>{
             } else {
                 A[k] = temp[j--];
             }
+            writeSortedDataToFile(A);
         }
 }
 
@@ -62,7 +66,16 @@ public class MergeSort<K extends Comparable<? super K>, E>{
             A[j] = current;
         }
     }
-
+    public void writeSortedDataToFile(Comparable[] array) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("mergeSort.txt"))) {
+            for (Comparable item : array) {
+                writer.write(item.toString()); // Assuming E has a meaningful toString method
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            System.err.println("Error writing to the file: " + e.getMessage());
+        }
+    }
 }
 
 
